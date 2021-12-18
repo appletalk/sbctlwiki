@@ -13,7 +13,7 @@ The image below displays the process in a simplified fashion.
 
 The effect of this, depending on the hardware, is essentially "soft bricking" the device. If you don't have any iGPU but your nvidia card has Option ROM that fails to validate, you might not have any way to display graphics. This would prevent you from turning off secure boot.
 
-One can figure out if these files are part of your bootchain by utilizing the Trusted Platform Module (TPM). It provides an eventlog which should record all of the Option ROM loaded during boot. These are recorded as `EFI_BOOT_SERVICE_DRIVER`.
+One can figure out if these files are part of your bootchain by utilizing the Trusted Platform Module (TPM). It provides an eventlog which should record all of the Option ROM loaded during boot. These are recorded as `EFI_BOOT_SERVICE_DRIVER` and can be parsed using `tpm2_eventlog` from the [tpm2-tools project](https://github.com/tpm2-software/tpm2-tools).
 
 ```
 $ cp /sys/kernel/security/tpm0/binary_bios_measurements eventlog
@@ -30,6 +30,7 @@ $ tpm2_eventlog eventlog | grep "BOOT_SERVICES_DRIVER"
   EventType: EV_EFI_BOOT_SERVICES_DRIVER
   EventType: EV_EFI_BOOT_SERVICES_DRIVER
 ```
+(Example with Option ROM present)
 
 If there is Option ROM in your bootchain there are two ways one can solve this:
 * Enroll the `Microsoft Corporation UEFI CA 2011` file.
