@@ -1,5 +1,3 @@
-# Linux/Windows Dual Boot with Windows Bitlocker
-
 The modern BitLocker implementation uses TPM2 to store the disk decryption key. This requires Secure Boot to be enabled for Windows to safely unseal the Bitlocker decryption key from the TPM. WIthout secure boot, you will be prompted for the long Bitlocker recovery key at every Windows boot.
 
 Setting this up with `sbctl` is fairly straightforward. The steps follow from [this blog post](https://saligrama.io/blog/post/upgrading-personal-security-evil-maid/#enrolling-your-key-into-secure-boot).
